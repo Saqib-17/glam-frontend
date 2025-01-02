@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Slider = () => {
   const slides = [
@@ -7,11 +7,23 @@ const Slider = () => {
     'https://i.ibb.co.com/ZdwQKSS/product-3.jpg',
     'https://i.ibb.co.com/P1fh7qK/product-4.webp',
   ];
+
   const [currentSlide, setCurrentSlide] = useState(0);
 
+  // Change slide function
   const changeSlide = (direction) => {
     setCurrentSlide((prev) => (prev + direction + slides.length) % slides.length);
   };
+
+  // Auto slide functionality
+  useEffect(() => {
+    const slideInterval = setInterval(() => {
+      changeSlide(1);  // Auto move to next slide every 5 seconds
+    }, 5000); // Change the slide every 5000 milliseconds (5 seconds)
+
+    // Cleanup the interval on component unmount
+    return () => clearInterval(slideInterval);
+  }, []);
 
   return (
     <div className="relative h-screen overflow-hidden">

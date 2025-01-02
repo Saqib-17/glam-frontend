@@ -2,7 +2,7 @@ import React from 'react';
 
 const Navbar = () => {
   return (
-    <nav className="flex justify-between items-center px-8 py-4 bg-gray-800 text-white">
+    <nav className="fixed top-0 left-0 w-full flex justify-between items-center px-8 py-4 bg-gray-800 text-white z-50 shadow-lg">
       <div className="text-2xl font-bold">
         <a href="#home">Glamkey</a>
       </div>

@@ -26,7 +26,7 @@ const TrendingOffers = () => {
   }, []);
 
   return (
-    <section className="bg-[#f0ccb4] py-12">
+    <section id='offers' className="bg-[#f0ccb4] py-12">
       <div className="text-center mb-8">
         <h1 className="text-4xl font-bold text-purple-600">Trending Offers</h1>
         <p className="text-lg text-gray-700">Our latest releases, just for you!</p>
