@@ -69,7 +69,7 @@ const ProductShowcase = () => {
           {products.map((product) => (
             <div
               key={product._id}
-              className="bg-white rounded-lg shadow-lg p-4 flex flex-col justify-between h-full"
+              className="bg-white rounded-lg shadow-lg p-4 flex flex-col justify-between h-full transform hover:-translate-y-3 transition-transform duration-300"
             >
               <img
                 src={product.image}

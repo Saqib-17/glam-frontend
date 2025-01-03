@@ -65,11 +65,11 @@ const CategoryShowcase = () => {
       ) : error ? (
         <div className="text-center text-lg text-red-500">{error}</div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mx-auto max-w-7xl px-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mx-auto max-w-7xl px-6 ">
           {categories.map((category) => (
             <div
               key={category.id}
-              className="bg-white rounded-lg shadow-lg p-4 text-center"
+              className="bg-white rounded-lg shadow-lg p-4 text-center transform hover:-translate-y-3 transition-transform duration-300"
             >
               <img
                 src={category.image}
