@@ -9,7 +9,7 @@ const ProductShowcase = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch("http://localhost:5000/products");
+        const response = await fetch("https://glam-backend.vercel.app/products");
         if (!response.ok) {
           throw new Error("Failed to fetch products");
         }

@@ -9,7 +9,7 @@ const TrendingOffers = () => {
   useEffect(() => {
     const fetchOffers = async () => {
       try {
-        const response = await fetch("http://localhost:5000/trendingOffers");
+        const response = await fetch("https://glam-backend.vercel.app/trendingOffers");
         if (!response.ok) {
           throw new Error("Failed to fetch trending offers");
         }
