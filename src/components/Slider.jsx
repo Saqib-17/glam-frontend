@@ -10,23 +10,20 @@ const Slider = () => {
 
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Change slide function
   const changeSlide = (direction) => {
     setCurrentSlide((prev) => (prev + direction + slides.length) % slides.length);
   };
 
-  // Auto slide functionality
   useEffect(() => {
     const slideInterval = setInterval(() => {
-      changeSlide(1);  // Auto move to next slide every 5 seconds
-    }, 5000); // Change the slide every 5000 milliseconds (5 seconds)
+      changeSlide(1);
+    }, 5000);
 
-    // Cleanup the interval on component unmount
     return () => clearInterval(slideInterval);
   }, []);
 
   return (
-    <div className="relative h-screen overflow-hidden">
+    <div className="relative w-full h-[300px] sm:h-[500px] md:h-[700px] overflow-hidden">
       {slides.map((src, index) => (
         <div
           key={index}
@@ -39,13 +36,13 @@ const Slider = () => {
       ))}
       <button
         onClick={() => changeSlide(-1)}
-        className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-black text-white px-4 py-2 rounded"
+        className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-black text-white px-4 py-2 rounded md:text-lg"
       >
         ❮
       </button>
       <button
         onClick={() => changeSlide(1)}
-        className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-black text-white px-4 py-2 rounded"
+        className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-black text-white px-4 py-2 rounded md:text-lg"
       >
         ❯
       </button>

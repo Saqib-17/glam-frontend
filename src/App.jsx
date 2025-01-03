@@ -10,6 +10,7 @@ import Footer from './components/Footer';
 import JewelleryGuides from './components/JewelleryGuides';
 import Videos from './components/Videos';
 import ComingSoon from './components/ComingSoon';  // Import the ComingSoon component
+import Chatbox from './components/Chatbox';
 
 const App = () => {
   return (
@@ -36,6 +37,7 @@ const LandingPage = () => (
     <Videos />
     <Contact />
     <Footer />
+    <Chatbox />
   </div>
 );
 

@@ -1,65 +1,45 @@
 import React, { useState, useEffect } from 'react';
-import { auth } from '../../firebase'; // Adjust the path to your firebase.js file
+import { auth } from '../../firebase';
 import { createUserWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
 
 const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [user, setUser] = useState(null); // State to track the logged-in user
-
-  // Handle signup
-  // const handleSignUp = async (e) => {
-  //   e.preventDefault();
-  //   const name = e.target.name.value;
-  //   const email = e.target.email.value;
-  //   const password = e.target.password.value;
-
-  //   try {
-  //     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-  //     console.log('User signed up:', userCredential.user);
-  //     alert('Sign up successful!');
-  //     setIsModalOpen(false); // Close modal
-  //   } catch (error) {
-  //     console.error('Error signing up:', error.message);
-  //     alert(error.message);
-  //   }
-  // };
+  const [user, setUser] = useState(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleSignUp = async (e) => {
     e.preventDefault();
     const name = e.target.name.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
-  
+
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-  
-      // Save user to MongoDB
+
       const response = await fetch('http://localhost:5000/users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name, email, password }), // Send user data
+        body: JSON.stringify({ name, email, password }),
       });
-  
+
       const result = await response.json();
       if (response.ok) {
-        console.log("User saved to MongoDB:", result);
+        console.log('User saved to MongoDB:', result);
       } else {
-        console.error("Error saving user:", result.message);
+        console.error('Error saving user:', result.message);
       }
-  
+
       alert('Sign up successful!');
-      setIsModalOpen(false); // Close modal
+      setIsModalOpen(false);
     } catch (error) {
       console.error('Error signing up:', error.message);
       alert(error.message);
     }
   };
-  
 
-  // Handle sign out
   const handleSignOut = async () => {
     try {
       await signOut(auth);
@@ -70,25 +50,31 @@ const Navbar = () => {
     }
   };
 
-  // Track user authentication state
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
     });
 
-    return () => unsubscribe(); // Cleanup subscription
+    return () => unsubscribe();
   }, []);
-
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
 
   return (
     <div>
-      <nav className="fixed top-0 left-0 w-full flex justify-between items-center px-8 py-4 bg-gray-800 text-white z-50 shadow-lg">
+      <nav className="fixed top-0 left-0 w-full flex justify-between items-center px-4 py-3 bg-gray-800 text-white z-50 shadow-lg md:px-8">
         <div className="text-2xl font-bold">
           <a href="#home">Glamkey</a>
         </div>
-        <ul className="flex items-center space-x-6">
+        <button
+          className="md:hidden text-white text-3xl focus:outline-none"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
+          ☰
+        </button>
+        <ul
+          className={`absolute md:static md:flex items-center md:space-x-6 bg-gray-800 md:bg-transparent top-16 md:top-auto left-0 w-full md:w-auto space-y-2 md:space-y-0 transition-all duration-300 ${
+            isMenuOpen ? 'block' : 'hidden'
+          }`}
+        >
           <li><a href="./" className="hover:text-yellow-400">Home</a></li>
           <li><a href="#about" className="hover:text-yellow-400">About</a></li>
           <li><a href="#shop" className="hover:text-yellow-400">Shop</a></li>
@@ -96,7 +82,7 @@ const Navbar = () => {
           <li><a href="#contact" className="hover:text-yellow-400">Contact</a></li>
           <li>
             {user ? (
-              <div className="flex items-center space-x-4">
+              <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4">
                 <span className="text-yellow-400">{user.email}</span>
                 <button
                   onClick={handleSignOut}
@@ -107,7 +93,7 @@ const Navbar = () => {
               </div>
             ) : (
               <button
-                onClick={openModal}
+                onClick={() => setIsModalOpen(true)}
                 className="bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600"
               >
                 Signup
@@ -116,13 +102,12 @@ const Navbar = () => {
           </li>
         </ul>
       </nav>
-
       {/* Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md relative">
             <button
-              onClick={closeModal}
+              onClick={() => setIsModalOpen(false)}
               className="absolute top-4 right-4 text-gray-600 hover:text-gray-800 text-2xl font-bold"
             >
               &times;
