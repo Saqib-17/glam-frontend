@@ -1,7 +1,83 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { auth } from '../../firebase'; // Adjust the path to your firebase.js file
+import { createUserWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
 
 const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [user, setUser] = useState(null); // State to track the logged-in user
+
+  // Handle signup
+  // const handleSignUp = async (e) => {
+  //   e.preventDefault();
+  //   const name = e.target.name.value;
+  //   const email = e.target.email.value;
+  //   const password = e.target.password.value;
+
+  //   try {
+  //     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+  //     console.log('User signed up:', userCredential.user);
+  //     alert('Sign up successful!');
+  //     setIsModalOpen(false); // Close modal
+  //   } catch (error) {
+  //     console.error('Error signing up:', error.message);
+  //     alert(error.message);
+  //   }
+  // };
+
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+    const name = e.target.name.value;
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+  
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+  
+      // Save user to MongoDB
+      const response = await fetch('http://localhost:5000/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, email, password }), // Send user data
+      });
+  
+      const result = await response.json();
+      if (response.ok) {
+        console.log("User saved to MongoDB:", result);
+      } else {
+        console.error("Error saving user:", result.message);
+      }
+  
+      alert('Sign up successful!');
+      setIsModalOpen(false); // Close modal
+    } catch (error) {
+      console.error('Error signing up:', error.message);
+      alert(error.message);
+    }
+  };
+  
+
+  // Handle sign out
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth);
+      alert('You have signed out successfully!');
+    } catch (error) {
+      console.error('Error signing out:', error.message);
+      alert('Error signing out!');
+    }
+  };
+
+  // Track user authentication state
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+
+    return () => unsubscribe(); // Cleanup subscription
+  }, []);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -19,12 +95,24 @@ const Navbar = () => {
           <li><a href="#offers" className="hover:text-yellow-400">Trending Offers</a></li>
           <li><a href="#contact" className="hover:text-yellow-400">Contact</a></li>
           <li>
-            <button
-              onClick={openModal}
-              className="bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600"
-            >
-              Signup
-            </button>
+            {user ? (
+              <div className="flex items-center space-x-4">
+                <span className="text-yellow-400">{user.email}</span>
+                <button
+                  onClick={handleSignOut}
+                  className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
+                >
+                  Sign Out
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={openModal}
+                className="bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600"
+              >
+                Signup
+              </button>
+            )}
           </li>
         </ul>
       </nav>
@@ -40,7 +128,7 @@ const Navbar = () => {
               &times;
             </button>
             <h2 className="text-2xl font-bold text-center text-gray-700 mb-6">Create an Account</h2>
-            <form action="/submit-signup" method="POST" className="space-y-4">
+            <form onSubmit={handleSignUp} className="space-y-4">
               <div>
                 <label htmlFor="name" className="block text-gray-700 font-medium">Full Name</label>
                 <input

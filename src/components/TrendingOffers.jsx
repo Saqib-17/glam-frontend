@@ -52,7 +52,7 @@ const TrendingOffers = () => {
           {offers.map((offer) => (
             <div
               key={offer._id} // Use the MongoDB ObjectId as the key
-              className="bg-white rounded-lg shadow-lg p-6 text-center flex flex-col items-center"
+              className="bg-white rounded-lg shadow-lg p-6 text-center flex flex-col items-center hover:scale-105 transform transition duration-300"
             >
               <img
                 src={offer.image}

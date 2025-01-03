@@ -20,25 +20,25 @@ const JewelleryGuides = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mx-auto max-w-7xl px-6">
           {/* Guide Cards */}
-          <div className="bg-white rounded-lg shadow-lg p-6 text-center flex flex-col items-center">
+          <div className="bg-white rounded-lg shadow-lg p-6 text-center flex flex-col items-center transform hover:-translate-y-3 transition-transform duration-300">
             <h3 className="font-bold text-gray-800 mb-2">Find Your Ring Size</h3>
             <img src="https://i.ibb.co.com/r271tsK/d.jpg" alt="Ring Image" className="rounded-lg w-48 h-48 object-cover mb-4" />
             <Link to="/coming-soon" className="text-orange-500 font-bold">Explore More →</Link>
           </div>
 
-          <div className="bg-white rounded-lg shadow-lg p-6 text-center flex flex-col items-center">
+          <div className="bg-white rounded-lg shadow-lg p-6 text-center flex flex-col items-center transform hover:-translate-y-3 transition-transform duration-300">
             <h3 className="font-bold text-gray-800 mb-2">The Bangles Size</h3>
             <img src="https://i.ibb.co.com/1b1rkqR/BANGLES.png" alt="Bangles Image" className="rounded-lg w-48 h-48 object-cover mb-4" />
             <Link to="/coming-soon" className="text-orange-500 font-bold">Explore More →</Link>
           </div>
 
-          <div className="bg-white rounded-lg shadow-lg p-6 text-center flex flex-col items-center">
+          <div className="bg-white rounded-lg shadow-lg p-6 text-center flex flex-col items-center transform hover:-translate-y-3 transition-transform duration-300">
             <h3 className="font-bold text-gray-800 mb-2">24k Pure Gold Necklace</h3>
             <img src="https://i.ibb.co.com/WxjnDnK/ring-2-1.jpg" alt="Gold Necklace" className="rounded-lg w-48 h-48 object-cover mb-4" />
             <Link to="/coming-soon" className="text-orange-500 font-bold">Explore More →</Link>
           </div>
 
-          <div className="bg-white rounded-lg shadow-lg p-6 text-center flex flex-col items-center">
+          <div className="bg-white rounded-lg shadow-lg p-6 text-center flex flex-col items-center transform hover:-translate-y-3 transition-transform duration-300">
             <h3 className="font-bold text-gray-800 mb-2">The Jewellery Care Guide</h3>
             <img src="https://i.ibb.co.com/ChwKL63/ring.jpg" alt="Jewellery Care" className="rounded-lg w-48 h-48 object-cover mb-4" />
             <Link to="/coming-soon" className="text-orange-500 font-bold">Explore More →</Link>
@@ -55,22 +55,22 @@ const JewelleryGuides = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mx-auto max-w-7xl px-6">
           {/* Gender Cards */}
-          <div className="bg-white rounded-lg shadow-lg p-6 text-center flex flex-col items-center">
+          <div className="bg-white rounded-lg shadow-lg p-6 text-center flex flex-col items-center transform hover:-translate-y-3 transition-transform duration-300">
             <img src="https://i.ibb.co.com/Q63tVcC/Men.webp" alt="Men Image" className="rounded-lg w-48 h-48 object-cover mb-4" />
             <Link to="/coming-soon" className="text-orange-500 font-bold">Explore More →</Link>
           </div>
 
-          <div className="bg-white rounded-lg shadow-lg p-6 text-center flex flex-col items-center">
+          <div className="bg-white rounded-lg shadow-lg p-6 text-center flex flex-col items-center transform hover:-translate-y-3 transition-transform duration-300">
             <img src="https://i.ibb.co.com/NskZVL4/kid.jpg" alt="Kid Image" className="rounded-lg w-48 h-48 object-cover mb-4" />
             <Link to="/coming-soon" className="text-orange-500 font-bold">Explore More →</Link>
           </div>
 
-          <div className="bg-white rounded-lg shadow-lg p-6 text-center flex flex-col items-center">
+          <div className="bg-white rounded-lg shadow-lg p-6 text-center flex flex-col items-center transform hover:-translate-y-3 transition-transform duration-300">
             <img src="https://i.ibb.co.com/XYGxCRG/Woman.webp" alt="Woman Image" className="rounded-lg w-48 h-48 object-cover mb-4" />
             <Link to="/coming-soon" className="text-orange-500 font-bold">Explore More →</Link>
           </div>
 
-          <div className="bg-white rounded-lg shadow-lg p-6 text-center flex flex-col items-center">
+          <div className="bg-white rounded-lg shadow-lg p-6 text-center flex flex-col items-center transform hover:-translate-y-3 transition-transform duration-300">
             <img src="https://i.ibb.co.com/4PcqdHC/get-together.jpg" alt="Get Together Image" className="rounded-lg w-48 h-48 object-cover mb-4" />
             <Link to="/coming-soon" className="text-orange-500 font-bold">Explore More →</Link>
           </div>
